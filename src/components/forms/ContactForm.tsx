@@ -1,25 +1,35 @@
-"use client" // Enables client-side rendering
+"use client"
 
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { FormData, contactFormSchema } from "@/lib/contactForm.schema"
 import { sendEmail } from "@/utils/sendEmail"
-import { FormData, contactFormSchema } from "@/lib/contact-form.schema"
-import Label from "@/components/common/Label"
-import Button from "@/components/common/Button"
 
-const ContactForm = () => {
+export default function ContactForm() {
     const {
-        register, // Register form fields
-        handleSubmit, // Handle form submission
-        reset, // Reset form fields
+        register,
+        handleSubmit,
+        reset,
         formState: { errors },
     } = useForm<FormData>({
         resolver: zodResolver(contactFormSchema),
     })
 
+    const [characterCount, setCharacterCount] = useState(0)
+    const MAX_MESSAGE_LENGTH = 1000
+
     function onSubmit(data: FormData) {
         sendEmail(data)
         reset()
+        setCharacterCount(0)
+    }
+
+    // Update message length state when message field changes
+    const handleTextareaChange = (
+        event: React.ChangeEvent<HTMLTextAreaElement>
+    ) => {
+        setCharacterCount(event.target.value.length)
     }
 
     return (
@@ -33,7 +43,9 @@ const ContactForm = () => {
             </header>
             <ul className="grid grid-cols-1 gap-y-4">
                 <li>
-                    <Label text="Name" htmlFor="name" />
+                    <label htmlFor="name" className="block">
+                        Name
+                    </label>
                     <input
                         type="text"
                         {...register("name")}
@@ -46,7 +58,9 @@ const ContactForm = () => {
                     )}
                 </li>
                 <li>
-                    <Label text="Email" htmlFor="email" />
+                    <label htmlFor="email" className="block">
+                        Email
+                    </label>
                     <input
                         type="email"
                         {...register("email")}
@@ -60,7 +74,9 @@ const ContactForm = () => {
                 </li>
 
                 <li>
-                    <Label text="Subject" htmlFor="subject" />
+                    <label htmlFor="Subject" className="block">
+                        Subject
+                    </label>
                     <input
                         type="text"
                         {...register("subject")}
@@ -73,12 +89,25 @@ const ContactForm = () => {
                     )}
                 </li>
                 <li>
-                    <Label text="Message" htmlFor="message" />
+                    <label htmlFor="message" className="block">
+                        Message
+                    </label>
                     <textarea
                         rows={4}
-                        {...register("message")}
                         className="w-full p-3 rounded-md bg-gray-800 outline-none"
+                        {...register("message", {
+                            onChange: handleTextareaChange,
+                        })}
                     ></textarea>
+                    <span
+                        className={`text-sm ${
+                            characterCount > MAX_MESSAGE_LENGTH
+                                ? "text-red-500"
+                                : "text-gray-400"
+                        }`}
+                    >
+                        {characterCount}/{MAX_MESSAGE_LENGTH} characters
+                    </span>
                     {errors.message && (
                         <p className="text-red-500 text-sm">
                             {errors.message.message}
@@ -86,14 +115,12 @@ const ContactForm = () => {
                     )}
                 </li>
             </ul>
-            <Button
-                className="hover:shadow-form rounded-md w-full bg-purple-500 p-3 text-base font-semibold text-white outline-none"
+            <button
                 type="submit"
+                className="hover:shadow-form rounded-md w-full bg-purple-500 p-3 text-base font-semibold text-white outline-none"
             >
                 Submit
-            </Button>
+            </button>
         </form>
     )
 }
-
-export default ContactForm

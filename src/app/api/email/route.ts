@@ -8,14 +8,14 @@ export async function POST(request: NextRequest) {
     const transport = nodemailer.createTransport({
         service: "gmail",
         auth: {
-            user: process.env.MY_EMAIL,
-            pass: process.env.MY_PASSWORD,
+            user: process.env.SMTP_USERNAME,
+            pass: process.env.SMTP_PASSWORD,
         },
     })
 
     const mailOptions: Mail.Options = {
         from: email, // Include the sender's name
-        to: process.env.MY_EMAIL,
+        to: process.env.SMTP_USERNAME,
         replyTo: email, // Allow the receiver to reply to the original sender
         subject,
         text: `From: ${name} <${email}>\n\n${message}`, // Plain text body

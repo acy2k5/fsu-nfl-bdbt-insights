@@ -7,7 +7,6 @@ interface AnchorProps {
     href: string
     rel?: string
     target?: string
-    title?: string
 }
 
 export default function Anchor({
@@ -16,16 +15,9 @@ export default function Anchor({
     href,
     rel,
     target,
-    title,
 }: AnchorProps) {
     return (
-        <Link
-            href={href}
-            className={className}
-            target={target}
-            rel={rel}
-            title={title}
-        >
+        <Link href={href} className={className} target={target} rel={rel}>
             {children}
         </Link>
     )
