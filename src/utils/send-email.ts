@@ -1,4 +1,4 @@
-import { FormData } from "@/lib/schemas/contactForm.schema"
+import { FormData } from "@/lib/contact-form.schema"
 
 export function sendEmail(data: FormData) {
     const apiEndpoint = "/api/email"

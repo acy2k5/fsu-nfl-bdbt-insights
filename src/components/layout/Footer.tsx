@@ -3,7 +3,7 @@
 import Link from "next/link"
 import React from "react"
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from "react-icons/fa"
-import Anchor from "@/components/common/Anchor"
+import Anchor from "@/components/ui/Anchor"
 
 // Footer Component
 const Footer = () => {
