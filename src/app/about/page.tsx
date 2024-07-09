@@ -5,7 +5,7 @@ export const metadata: Metadata = {
     description: "Page description",
 }
 
-import Team from "@/app/about/components/team"
+import Team from "@/app/about/components/Team"
 import Testimonial from "@/app/about/components/Testimonial"
 
 export default function About() {
