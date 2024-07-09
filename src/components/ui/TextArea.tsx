@@ -19,7 +19,7 @@ export default function CharacterCounter({
     maxLength,
     placeholder,
     register,
-    rows = 5,
+    rows = 5, // default rows to 5
     title,
 }: CharacterCounterProps) {
     const [characterCount, setCharacterCount] = useState(0)

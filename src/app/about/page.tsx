@@ -5,18 +5,14 @@ export const metadata: Metadata = {
     description: "Page description",
 }
 
-import Hero from "@/app/about/components/hero"
-import Organizations from "@/app/about/components/organizations"
 import Team from "@/app/about/components/team"
-import Testimonials from "@/app/about/components/testimonials"
+import Testimonial from "@/app/about/components/Testimonial"
 
 export default function About() {
     return (
         <>
-            <Hero />
-            <Organizations />
             <Team />
-            <Testimonials />
+            <Testimonial />
         </>
     )
 }

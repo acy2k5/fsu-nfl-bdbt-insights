@@ -34,7 +34,7 @@ export default function Input({
     placeholder,
     register,
     title,
-    type = "text",
+    type = "text", // default type is "text"
 }: InputProps) {
     return (
         <li>
