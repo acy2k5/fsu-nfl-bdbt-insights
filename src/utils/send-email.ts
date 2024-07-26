@@ -1,20 +1,20 @@
-import { FormData } from "@/lib/contact-form.schema"
+import { FormData } from '@/lib/contact-form.schema'
 
 export function sendEmail(data: FormData) {
-    const apiEndpoint = "/api/email"
+  const apiEndpoint = '/api/email'
 
-    fetch(apiEndpoint, {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: {
-            "Content-Type": "application/json",
-        },
+  fetch(apiEndpoint, {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => res.json())
+    .then((response) => {
+      alert(response.message)
     })
-        .then((res) => res.json())
-        .then((response) => {
-            alert(response.message)
-        })
-        .catch((err) => {
-            alert(err)
-        })
+    .catch((err) => {
+      alert(err)
+    })
 }

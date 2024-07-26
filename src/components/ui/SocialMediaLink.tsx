@@ -1,9 +1,11 @@
 import Link from 'next/link'
+import { IconType } from 'react-icons'
 
-interface AnchorProps {
-  children: React.ReactNode
+interface SocialMediaLinkProps {
   className?: string
   href: string
+  icon: IconType
+  platform: string
   rel?: string
   target?: string
   title?: string
@@ -12,14 +14,15 @@ interface AnchorProps {
 const defaultRel = 'noopener noreferrer'
 const defaultTarget = '_blank'
 
-export default function Anchor({
-  children,
-  className,
+export default function SocialMediaLink({
+  className = 'justify-center text-gray-400 hover:text-white transition duration-200 ease-in-out',
   href,
+  icon: Icon,
+  platform,
   rel = defaultRel,
   target = defaultTarget,
-  title,
-}: AnchorProps) {
+  title = `Visit ${platform}.com`,
+}: SocialMediaLinkProps) {
   return (
     <Link
       className={className}
@@ -28,7 +31,7 @@ export default function Anchor({
       target={target}
       title={title}
     >
-      {children}
+      <Icon aria-hidden={true} />
     </Link>
   )
 }
