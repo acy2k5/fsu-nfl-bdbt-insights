@@ -1,61 +1,68 @@
 import Anchor from '@/components/ui/Anchor'
+import Header from '@/components/ui/Header'
+import Mapper from '@/components/ui/Mapper'
 
-// Define the Organization interface
-interface Organization {
-  description: string
+interface OrganizationProps {
+  id: number
   logo: string
   name: string
   url: string
 }
 
-// Define the OrganizationsProps interface
-interface OrganizationsProps {
-  organizations: Organization[]
-}
-
-// Create a sample organizations list
-const organizationsList: Organization[] = [
+const organizations: OrganizationProps[] = [
   {
-    description: 'This is a description of Organization 1',
-    logo: 'https://example.com/logo1.png',
-    name: 'Organization 1',
-    url: 'https://example.com/org1',
+    id: 1,
+    logo: 'https://th.bing.com/th/id/R.bbab252af72131ef7e984638195ee2c1?rik=IDhsFLkht4OB5Q&riu=http%3a%2f%2fwww.famunews.com%2fwp-content%2fuploads%2f2013%2f09%2fFAMU_SEAL-on-White.png&ehk=sM0hqv4ebTgEpsHPepOu47jfB%2fGo4qSOSdsHoCHUgrU%3d&risl=&pid=ImgRaw&r=0',
+    name: 'Florida A&M University',
+    url: 'https://www.famu.edu',
   },
   {
-    description: 'This is a description of Organization 2',
-    logo: 'https://example.com/logo2.png',
-    name: 'Organization 2',
-    url: 'https://example.com/org2',
+    id: 2,
+    logo: 'https://edurank.org/assets/img/uni-logos/florida-state-university-logo.png',
+    name: 'Florida State University',
+    url: 'https://www.fsu.edu',
   },
   {
-    description: 'This is a description of Organization 3',
-    logo: 'https://example.com/logo3.png',
-    name: 'Organization 3',
-    url: 'https://example.com/org3',
+    id: 3,
+    logo: 'https://1000logos.net/wp-content/uploads/2020/10/National-Science-Foundation-logo-640x643.png',
+    name: 'National Science Foundation',
+    url: 'https://www.nsf.gov/',
   },
 ]
 
-// Create the Organizations component
-export default function Organizations({ organizations }: OrganizationsProps) {
+export default function Organizations() {
   return (
-    <div className="grid grid-cols-1 mt-12 text-center sm:mt-16 gap-x-20 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-      <h2>Sponsored Organizations</h2>
-      <ul>
-        {organizations.map((org) => (
-          <li key={org.name}>
-            <img alt={org.name} className="mx-auto w-48 h-48" src={org.logo} />
-            <h3>
-              <a href={org.url} target="_blank" rel="noopener noreferrer">
-                {org.name}
-              </a>
-            </h3>
-            <p>{org.description}</p>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <section className="relative" id="spotlight">
+      {/* Main content container */}
+      <div className="max-w-screen-xl px-4 py-8 mx-auto lg:px-6 sm:py-16 lg:py-24">
+        {/* Section header */}
+        <Header
+          heading="Our Sponsors"
+          headingLevel={2}
+          subtext="A showcase of thanks to those that made this possible!"
+        />
+        {/* Section content */}
+        <Mapper<OrganizationProps>
+          data={organizations}
+          renderItem={(org) => (
+            <li key={org.id} className="flex flex-col items-center text-center">
+              <img
+                alt={org.name}
+                className="w-32 h-32 object-contain mb-4"
+                src={org.logo}
+              />
+              <h3 className="text-lg font-semibold mb-2">
+                <Anchor href={org.url}>{org.name}</Anchor>
+              </h3>
+            </li>
+          )}
+          WrapperElement="ul"
+          wrapperProps={{
+            className:
+              'grid grid-cols-1 gap-y-12 sm:grid-cols-2 lg:grid-cols-3 gap-x-12',
+          }}
+        />
+      </div>
+    </section>
   )
 }
-
-// Export the organizationsList
-export { organizationsList }

@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation'
 import clsx from 'clsx'
 import MobileMenu from '@/components/layout/MobileMenu'
 import Anchor from '@/components/ui/Anchor'
-
+import LinkList from '@/components/ui/LinkMapper'
 const SCROLL_THRESHOLD = 10
 
 function SiteBranding() {
@@ -50,31 +50,32 @@ function SiteBranding() {
 function DesktopMenu() {
   const pathname = usePathname()
 
-  const menuItems = [
-    ['Landing', '/'],
-    ['About Us', '/about'],
-    ['Contact Us', 'mailto:lichunli@eng.famu.fsu.edu'],
-    ['Project', '/project'],
-  ]
+
+
 
   return (
-    <ul className="gap-6 justify-end flex-wrap items-center hidden md:flex md:grow">
-      {menuItems.map(([anchorText, hyperlink]) => (
-        <li key={hyperlink}>
-          <Link
-            href={hyperlink}
-            className={clsx(
-              'font-medium text-gray-400 hover:text-white transition duration-300 ease-in-out',
-              {
-                'text-white': pathname === hyperlink,
-              },
-            )}
-          >
-            {anchorText}
-          </Link>
-        </li>
-      ))}
-    </ul>
+    <LinkList
+      commonClassName={clsx(
+        'font-medium text-gray-400 hover:text-white transition duration-300 ease-in-out',
+        {
+          'text-white': pathname === '/',
+        },
+      )}
+      links={[
+        { label: 'Home', href: '/' },
+        { label: 'About Us', href: '/about' },
+        { label: 'Contact Us', href: '/contact' },
+        { label: 'Notebook', href: '/notebook' },
+      ]}
+      WrapperElement="ul"
+      wrapperProps={{
+        className:
+          'gap-6 justify-end flex-wrap items-center hidden md:flex md:grow',
+      }}
+    />
+
+
+
   )
 }
 
@@ -94,11 +95,10 @@ export default function Nav() {
 
   return (
     <nav
-      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${
-        top
-          ? ''
-          : 'border-solid border-0 border-b border-gray-800 bg-black backdrop-blur-sm'
-      }`}
+      className={`fixed w-full z-30 md:bg-opacity-90 transition duration-300 ease-in-out ${top
+        ? ''
+        : 'border-solid border-0 border-b border-gray-800 bg-black backdrop-blur-sm'
+        }`}
     >
       <div className="max-w-screen-xl mx-auto px-6">
         <div className="flex items-center justify-between h-16 md:h-20">

@@ -8,43 +8,39 @@ import clsx from 'clsx'
 
 export default function MobileMenu() {
   const pathname = usePathname()
+  const [mobileNavOpen, setMobileNavOpen] = useState(false)
+  const triggerRef = useRef<HTMLButtonElement>(null)
+  const mobileNavRef = useRef<HTMLDivElement>(null)
 
-  const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
-
-  const trigger = useRef<HTMLButtonElement>(null)
-  const mobileNav = useRef<HTMLDivElement>(null)
-
-  // close the mobile menu on click outside
   useEffect(() => {
-    const clickHandler = ({ target }: { target: EventTarget | null }): void => {
-      if (!mobileNav.current || !trigger.current) return
+    const handleOutsideClick = ({ target }: { target: EventTarget | null }) => {
+      if (!mobileNavRef.current || !triggerRef.current) return
       if (
         !mobileNavOpen ||
-        mobileNav.current.contains(target as Node) ||
-        trigger.current.contains(target as Node)
+        mobileNavRef.current.contains(target as Node) ||
+        triggerRef.current.contains(target as Node)
       )
         return
       setMobileNavOpen(false)
     }
-    document.addEventListener('click', clickHandler)
-    return () => document.removeEventListener('click', clickHandler)
+    document.addEventListener('click', handleOutsideClick)
+    return () => document.removeEventListener('click', handleOutsideClick)
   }, [mobileNavOpen])
 
-  // close the mobile menu if the esc key is pressed
   useEffect(() => {
-    const keyHandler = ({ keyCode }: { keyCode: number }): void => {
+    const handleEscKey = ({ keyCode }: { keyCode: number }) => {
       if (!mobileNavOpen || keyCode !== 27) return
       setMobileNavOpen(false)
     }
-    document.addEventListener('keydown', keyHandler)
-    return () => document.removeEventListener('keydown', keyHandler)
+    document.addEventListener('keydown', handleEscKey)
+    return () => document.removeEventListener('keydown', handleEscKey)
   }, [mobileNavOpen])
 
   return (
     <div className="flex md:hidden">
       {/* Hamburger button */}
       <button
-        ref={trigger}
+        ref={triggerRef}
         className={`hamburger ${mobileNavOpen ? 'active' : ''}`}
         aria-label="Toggle Mobile Menu"
         aria-controls="mobile-nav"
@@ -64,7 +60,7 @@ export default function MobileMenu() {
       </button>
 
       {/* Mobile navigation */}
-      <div ref={mobileNav}>
+      <div ref={mobileNavRef}>
         <Transition
           show={mobileNavOpen}
           as="nav"
@@ -77,14 +73,14 @@ export default function MobileMenu() {
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <ul className="grid colgs-1 gap-6 p-6">
+          <ul className="grid grid-cols-1 gap-6 p-6">
             {[
-              ['Landing', '/'],
+              ['Home', '/'],
               ['About Us', '/about'],
-              ['Contact Us', 'mailto:lichunli@eng.famu.fsu.edu'],
-              ['Project', '/project'],
+              ['Contact Us', '/contact'],
+              ['Notebook', '/notebook'],
             ].map(([anchorText, hyperlink]) => (
-              <li>
+              <li key={hyperlink}>
                 <Link
                   href={hyperlink}
                   className={clsx(

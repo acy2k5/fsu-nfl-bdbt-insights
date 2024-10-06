@@ -5,26 +5,18 @@ export const metadata: Metadata = {
   description: 'Page description',
 }
 
-import Organizations, {
-  organizationsList,
-} from '@/app/about/components/Organizations'
-import Team from '@/app/about/components/Team'
-import Testimonial from '@/components/ui/Testimonial'
+import Hero from "@/app/about/components/Hero"
+import Organizations from "@/app/about/components/Organizations"
+import Team from "@/app/about/components/Team"
+import Testimonial from "@/app/about/components/Testimonial"
 
 export default function About() {
   return (
     <>
-      <Organizations organizations={organizationsList} />
+      <Hero />
+      <Organizations />
       <Team />
-      <Testimonial
-        image="https://example.com/image.jpg"
-        name="John Doe"
-        title="CEO, ABC Corporation"
-        text="This is a testimonial text. This is a testimonial text."
-        bgColor="bg-blue-100"
-        textColor="text-blue-900"
-        borderColor="border-blue-500"
-      />
+      <Testimonial />
     </>
   )
 }

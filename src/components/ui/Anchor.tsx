@@ -9,15 +9,12 @@ interface AnchorProps {
   title?: string
 }
 
-const defaultRel = 'noopener noreferrer'
-const defaultTarget = '_blank'
-
 export default function Anchor({
   children,
   className,
   href,
-  rel = defaultRel,
-  target = defaultTarget,
+  rel,
+  target,
   title,
 }: AnchorProps) {
   return (

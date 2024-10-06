@@ -2,8 +2,8 @@
 
 import { FaFacebook, FaInstagram, FaLinkedin, FaTwitter } from 'react-icons/fa'
 import Anchor from '@/components/ui/Anchor'
-import LinkList from '@/components/ui/LinkList'
-import SocialMediaLink from '@/components/ui/SocialMediaLink'
+import LinkList from '@/components/ui/LinkMapper'
+import SocialMediaLink from '@/components/ui/SocialLink'
 
 // Footer Component
 export default function Footer() {

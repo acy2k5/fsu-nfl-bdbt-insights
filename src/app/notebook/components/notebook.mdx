@@ -1,0 +1,17 @@
+# Dynamic Tackler Identification: Real-Time Assessment of Threatening Index for Defensive Team Players
+
+# 1. Motivation
+
+This project focuses on **real-time identification of potential threats** to the ball carrier using **AI techniques**. Leveraging historical data from a team's interactions with other teams, the trained AI model can effectively pinpoint and highlight players posing a threat in the current in-field situation. This innovative approach **enhances the viewing experience for fans**, providing them with **more engaging and exciting insights** during game-watching sessions.
+
+# 2. Main results and visualization
+
+In each frame, the AI model calculates the **threatening index**, representing the probability of a Defensive Team (DT) player to act as a tackler. This computation is performed for every DT player. The visualization tool then strategically highlights DT players based on their respective tackling probabilities.
+
+The provided model, named 'tackler_test_result_48_42.h5', is designed to specifically identify tacklers when the Miami Dolphins are the possession team (PT). Trained on the tracking and play data from Miami Dolphins' performances in weeks 1-8 of 2022, the model is put to the test during Miami Dolphins' week 9 game against the Chicago Bears (gameId: 2022110601). The ensuing video demonstrates the model's performance in action.
+
+(Note: Although this model is specifically trained for the Miami Dolphins, the same concept can be readily extended to other teams. We are currently conducting tests to determine if a universal model that can accommodate all teams is feasible.)
+
+This video features 32 plays where the Miami Dolphins are the possession team, and tacklers are identified within the play data. Miami Dolphins and Chicago Bears players are represented by orange and blue circles, respectively, while the ballcarrier is denoted by a brown circle. The intensity of the blue circles reflects the threatening index of each player, with brighter blue circles indicating higher threat levels and darker blue circles representing lower threat levels.
+
+The playID for the 32 plays are [2176, 3456, 1027, 2564, 2312, 1929, 394, 3094, 2200, 1048, 1689, 1950, 2336, 930, 2595, 304, 1713, 2224, 2616, 955, 451, 2245, 2379, 979, 1625, 349, 2269, 1003, 1646, 1905, 373, 1791].

@@ -23,7 +23,9 @@ export default function Button({
 }: ButtonProps) {
   return (
     <button
-      className={`${variants[variant]}`}
+      className={`${variants[variant]} ${
+        disabled ? 'opacity-50 cursor-not-allowed' : ''
+      }`}
       disabled={disabled}
       title={title}
       type={type}
